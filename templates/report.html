@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+</head>
+<body>
+    <h1>Report</h1>
+    <ul>
+        {% for id, name in items %}
+        <li>{{ id }}: {{ name }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('manage_items') }}">Back to Items</a>
+</body>
+</html>

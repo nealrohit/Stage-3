@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Edit Item</title>
+  </head>
+  <body>
+    <h1>Edit Item</h1>
+    <form method="POST">
+      <input type="text" name="name" value="{{ item.name }}">
+      <button type="submit">Update</button>
+    </form>
+    <a href="{{ url_for('manage_items') }}">Back to Items</a>
+  </body>
+</html>
