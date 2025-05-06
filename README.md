@@ -8,9 +8,12 @@ A simple Flask application to add, edit, delete, and report on items, with an in
    ```bash
    python3 -m venv venv
    source venv/bin/activate
+   ```
 
-2. Install dependencies 
-    pip install -r requirements.txt
+2. Install dependencies:
+   ```bash
+   pip install Flask Flask-SQLAlchemy
+   ```
 
 3. Run the app
     python app2.py
