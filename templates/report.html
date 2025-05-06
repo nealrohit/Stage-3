@@ -6,6 +6,14 @@
 </head>
 <body>
     <h1>Report</h1>
+
+    <!-- Filter form goes here -->
+    <form action="{{ url_for('report') }}" method="get">
+      <input type="text" name="q" placeholder="Search name…" 
+             value="{{ request.args.get('q','') }}">
+      <button type="submit">Filter</button>
+    </form>
+
     <ul>
         {% for id, name in items %}
         <li>{{ id }}: {{ name }}</li>
