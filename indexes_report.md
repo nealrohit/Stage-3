@@ -19,3 +19,13 @@ This document describes all indexes on my database tables and the queries/report
 SELECT id, name
 FROM item
 WHERE id = :item_id;
+
+**Used in**
+- edit/<int:item_id> route in app2.py (loads item for editing)
+- /delete/<int:item_id> route in app2.py (fetches then deletes item)
+
+## 2. Explicit Index on 'item.name'
+
+**Index name**
+- idx_item_name (created by me)
+
