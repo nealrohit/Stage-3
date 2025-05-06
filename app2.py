@@ -17,6 +17,11 @@ class Item(db.Model):
 with app.app_context():
     db.create_all()
     print("Database tables created.")
+    with db.engine.connect() as conn:
+        conn.execute(text("CREATE INDEX IF NOT EXISTS idx_item_name ON item(name);"))
+        conn.execute(text("CREATE INDEX IF NOT EXISTS idx_item_name_ci ON item(name COLLATE NOCASE);"))
+        conn.execute(text("CREATE INDEX IF NOT EXISTS idx_item_name_id ON item(name, id);"))
+        
 
 @app.route('/')
 def home():
@@ -54,13 +59,29 @@ def delete_item(item_id):
     flash('Item deleted successfully!')
     return redirect(url_for('manage_items'))
 
+@app.route('/batch_update', methods=['POST'])
+def batch_update():
+    updates = request.form.getlist('names')  # example list
+    with db.session.begin():
+        for idx, name in enumerate(updates, start=1):
+            item = Item.query.get(idx)
+            item.name = name
+    flash('Batch update committed atomically!')
+    return redirect(url_for('manage_items'))
+
 #Requirement 2
 @app.route('/report')
 def report():
-    query = text("SELECT id, name FROM item")
-    with db.engine.connect() as conn:
-        result = conn.execute(query)
-        items = result.fetchall()
+    term = request.args.get('q', '')
+    if term:
+        query = text("SELECT id, name FROM item WHERE name LIKE :patt")
+        patt = f"%{term}%"
+        with db.engine.connect() as conn:
+            items = conn.execute(query, {"patt": patt}).fetchall()
+    else:
+        query = text("SELECT id, name FROM item")
+        with db.engine.connect() as conn:
+            items = conn.execute(query).fetchall()
     return render_template('report.html', items=items)
 
 if __name__ == '__main__':
