@@ -1,6 +1,6 @@
 # Indexes Report
 
-This document describes all indexes on our database tables and the queries/reports they accelerate (Stage 3 Deliverable #1).
+This document describes all indexes on my database tables and the queries/reports they accelerate (Stage 3 Deliverable #1).
 
 ---
 
