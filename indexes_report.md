@@ -22,17 +22,17 @@ WHERE id = :item_id;
 ```
 
 **Used in**
-- edit/<int:item_id> route in app2.py (loads item for editing)
-- /delete/<int:item_id> route in app2.py (fetches then deletes item)
+- `edit/<int:item_id>` route in app2.py (loads item for editing)
+- `/delete/<int:item_id>` route in app2.py (fetches then deletes item)
 
-## 2. Explicit Index on 'item.name'
+## 2. Explicit Index on `item.name`
 
 **Index name**
-- idx_item_name (created by me)
+- `idx_item_name` (created by me)
 
-**Table & column**
-- Table: item
-- Column: name
+**Table & column**  
+- **Table:** `item`  
+- **Column:** `name`
 
 **DDL statement**
 ```sql
@@ -49,5 +49,5 @@ WHERE name LIKE :search_pattern;
 ```
 
 **Used in**
-- /report route in app2.py (renders report.html)
+- `/report` route in app2.py (renders report.html)
 - Future dynamic filtering on the report page (e.g., adding a text box to narrow by name)
