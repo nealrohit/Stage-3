@@ -19,6 +19,7 @@ This document describes all indexes on my database tables and the queries/report
 SELECT id, name
 FROM item
 WHERE id = :item_id;
+```
 
 **Used in**
 - edit/<int:item_id> route in app2.py (loads item for editing)
@@ -29,3 +30,24 @@ WHERE id = :item_id;
 **Index name**
 - idx_item_name (created by me)
 
+**Table & column**
+- Table: item
+- Column: name
+
+**DDL statement**
+```sql
+CREATE INDEX IF NOT EXISTS idx_item_name
+ON item(name);
+```
+
+**Supported query(ies)**  
+```sql
+-- Report of all items, optionally filtered by name
+SELECT id, name
+FROM item
+WHERE name LIKE :search_pattern;
+```
+
+**Used in**
+- /report route in app2.py (renders report.html)
+- Future dynamic filtering on the report page (e.g., adding a text box to narrow by name)
